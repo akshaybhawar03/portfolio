@@ -122,7 +122,7 @@ export default function Hero({ visible }) {
             {typed}
             <span className="inline-block w-2 h-5 bg-[#00c8ff] ml-1 animate-pulse-arc align-middle" />
           </span>
-        </div>
+        </h2>
 
         {/* CTAs */}
         <motion.div

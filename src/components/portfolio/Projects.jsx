@@ -7,7 +7,7 @@ import { PROJECTS as TIDS } from "@/constants/testIds";
 
 function MissionCard({ p, index, onOpen }) {
   return (
-    <motion.div
+    <motion.article
       initial={{ opacity: 0, y: 40, rotateX: -10 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
       viewport={{ once: true, amount: 0.2 }}
@@ -33,9 +33,9 @@ function MissionCard({ p, index, onOpen }) {
         </div>
         <div className="flex-1 min-w-0">
           <div className="font-mono text-[10px] tracking-[0.35em] text-[#e23636]">CLASSIFIED · {p.code}</div>
-          <div className="font-display font-black text-white text-xl md:text-2xl mt-1 tracking-wide group-hover:text-glow-arc transition">
+          <h3 className="font-display font-black text-white text-xl md:text-2xl mt-1 tracking-wide group-hover:text-glow-arc transition">
             {p.name}
-          </div>
+          </h3>
           <div className="font-mono text-[10px] tracking-[0.3em] text-[#00c8ff] mt-1">{p.classification}</div>
         </div>
       </div>
@@ -69,7 +69,7 @@ function MissionCard({ p, index, onOpen }) {
         <span>▸ OPEN MISSION DOSSIER</span>
         <span className="opacity-0 group-hover:opacity-100 transition">[ENTER]</span>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
 
@@ -165,7 +165,8 @@ function DossierModal({ project, onClose }) {
               <a
                 href="https://github.com/akshaybhawar03"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
+                aria-label={`View source code for ${project.name} on GitHub`}
                 className="hud-btn"
               >
                 <ExternalLink size={14} /> VIEW SOURCE
@@ -184,7 +185,7 @@ function DossierModal({ project, onClose }) {
 export default function Projects() {
   const [open, setOpen] = useState(null);
   return (
-    <section id="projects" data-testid={TIDS.root || "scene-projects"} className="relative w-full">
+    <section id="projects" aria-label="My Projects" data-testid={TIDS.root || "scene-projects"} className="relative w-full">
       <ChapterCard chapter="CHAPTER III / 06" title="MISSION BRIEFING" accent="#e23636" />
 
       {/* Faint moving world map background */}

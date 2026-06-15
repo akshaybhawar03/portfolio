@@ -15,9 +15,20 @@ export default function Footer() {
   return (
     <footer
       id="footer"
+      role="contentinfo"
       data-testid={FOOTER.root}
       className="relative w-full overflow-hidden border-t border-[#00c8ff]/15"
     >
+      <div className="sr-only">
+        <h2>About This Portfolio</h2>
+        <p>
+          Welcome to the official portfolio of Akshay Bhawar, a top Full Stack Developer and Design Engineer based in Pune, Maharashtra. 
+          Specializing in React, Next.js, Node.js, and MongoDB, Akshay is available for hire in India and worldwide. 
+          Whether you need a MERN Stack Developer, a Next.js Developer in India, or a Web Developer in Daund, 
+          Akshay delivers highly optimized, scalable, and cinematic web experiences. 
+          Known as the Best Full Stack Developer Maharashtra for combining modern tech with stunning UI/UX design.
+        </p>
+      </div>
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-20 relative">
         <div className="font-mono text-[11px] tracking-[0.4em] text-[#00c8ff] text-center mb-10">
           // END OF FILE

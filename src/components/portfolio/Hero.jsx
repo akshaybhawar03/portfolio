@@ -30,9 +30,12 @@ export default function Hero({ visible }) {
   return (
     <section
       id="hero"
+      aria-label="Introduction"
       data-testid={HERO.root}
       className="relative min-h-screen w-full overflow-hidden flex items-center justify-center tech-grid scan-lines"
     >
+      <h1 className="sr-only">Akshay Bhawar - Full Stack Developer</h1>
+      
       {/* Background globe */}
       <div className="absolute inset-0 flex items-center justify-center opacity-90 pointer-events-none">
         <div className="hidden md:block" data-testid={HERO.globe}>
@@ -70,6 +73,7 @@ export default function Hero({ visible }) {
         </motion.div>
 
         <div
+          aria-hidden="true"
           data-testid={HERO.title}
           className="font-display font-black text-white text-[42px] sm:text-7xl md:text-8xl lg:text-[120px] leading-[0.95] tracking-tight flex flex-wrap justify-center gap-[0.3em]"
         >
@@ -110,7 +114,7 @@ export default function Hero({ visible }) {
         </div>
 
         {/* Subtitle */}
-        <div className="mt-6 h-7">
+        <h2 className="mt-6 h-7">
           <span
             data-testid={HERO.subtitle}
             className="font-mono text-sm md:text-base tracking-[0.2em] text-[#b9d6e6]"

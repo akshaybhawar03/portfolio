@@ -71,7 +71,8 @@ function Hexagon({ skill, accent, index, groupKey }) {
 
 export default function Skills() {
   return (
-    <section id="skills" data-testid={SKILLS.root} className="relative w-full tech-grid">
+    <section id="skills" aria-label="Technical Skills" data-testid={SKILLS.root} className="relative w-full tech-grid">
+      <h2 className="sr-only">Technical Skills - MERN Stack Developer, Node.js MongoDB Developer</h2>
       <ChapterCard chapter="CHAPTER II / 06" title="THE POWER CORE" accent="#00c8ff" />
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 pb-24">
         {SKILL_GROUPS.map((group) => (

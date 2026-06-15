@@ -53,7 +53,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" data-testid={CONTACT.root} className="relative w-full overflow-hidden">
+    <section id="contact" aria-label="Contact Information" data-testid={CONTACT.root} className="relative w-full overflow-hidden">
       <ChapterCard chapter="CHAPTER V / 06" title="OPEN COMMS CHANNEL" accent="#ff6b35" />
 
       {/* Radar background */}
@@ -209,6 +209,6 @@ function Locator({ icon, label, value, href }) {
       </div>
     </div>
   );
-  if (href) return <a href={href} target="_blank" rel="noreferrer">{Inner}</a>;
+  if (href) return <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Visit my ${label}`}>{Inner}</a>;
   return Inner;
 }

@@ -4,16 +4,16 @@ import { TIMELINE, PROFILE } from "@/components/portfolio/data";
 import ChapterCard from "@/components/portfolio/ChapterCard";
 
 const STORY = [
-  "From a curious kid in Pune to a full-stack engineer shipping production systems —",
+  "From a curious kid in Pune to a Full Stack Developer available for hire in India —",
   "every line of code is a frame in an unfolding origin story.",
-  "Stack-fluent across the modern web. Obsessed with detail. Allergic to mediocrity.",
+  "Stack-fluent across the modern web. Recognized as a top Full Stack Developer in Maharashtra, obsessed with detail and allergic to mediocrity.",
   "I don't just build apps. I engineer experiences that feel inevitable.",
 ];
 
 export default function About() {
   return (
-    <section id="about" data-testid={ABOUT.root} className="relative w-full">
-      <ChapterCard chapter="CHAPTER IV / 06" title="THE ORIGIN" accent="#7b2fbe" />
+    <section id="about" aria-label="About Akshay Bhawar" data-testid={ABOUT.root} className="relative w-full">
+      <ChapterCard chapter="CHAPTER IV / 06" title="THE ORIGIN" accent="#7b2fbe" as="h2" />
 
       <div className="mx-auto max-w-[1400px] px-6 lg:px-10 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

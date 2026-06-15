@@ -64,11 +64,11 @@ export default function Navbar() {
           onClick={() => go("hero")}
           className="group flex items-center gap-3"
         >
-          <div className="relative w-8 h-8 rounded-full bg-[#00c8ff] animate-pulse-arc shadow-[0_0_20px_#00c8ff]">
-            <div className="absolute inset-1 rounded-full bg-black flex items-center justify-center">
-              <div className="w-3 h-3 rounded-full bg-[#00c8ff] shadow-[0_0_10px_#00c8ff]" />
-            </div>
-          </div>
+          <img 
+            src="/imgs/Copilot_20260615_221116.png" 
+            alt="Akshay Logo" 
+            className="w-10 h-10 object-contain drop-shadow-[0_0_12px_rgba(0,200,255,0.6)]" 
+          />
           <div className="font-display tracking-[0.32em] text-xs text-white">
             AKSHAY<span className="text-[#00c8ff]">.EXE</span>
           </div>

@@ -65,7 +65,7 @@ export default function Navbar() {
           className="group flex items-center gap-3"
         >
           <img 
-            src={`${import.meta.env.BASE_URL}imgs/logo.png`}
+            src={`${import.meta.env.BASE_URL}imgs/logo-white.png`}
             alt="Akshay Logo" 
             className="w-10 h-10 object-contain drop-shadow-[0_0_12px_rgba(0,200,255,0.6)]" 
           />

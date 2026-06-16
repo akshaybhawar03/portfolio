@@ -37,3 +37,11 @@ Welcome to my personal portfolio repository! This is a modern, fully responsive,
 ├── tailwind.config.js  # Tailwind CSS configuration
 └── vite.config.js      # Vite build setup
 
+---
+
+## 🌐 Connect with Me
+
+Let's connect and talk about development, tech, or collaborations!
+
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/akshay-bhawar-5a7848291/)
+[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:bhawarakshay2003@gmail.com)

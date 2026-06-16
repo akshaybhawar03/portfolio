@@ -37,32 +37,3 @@ Welcome to my personal portfolio repository! This is a modern, fully responsive,
 ├── tailwind.config.js  # Tailwind CSS configuration
 └── vite.config.js      # Vite build setup
 
-⚙️ Local Development Setup
-To get a local copy up and running, follow these simple steps:
-
-Clone the repository:
-
-Bash
-git clone [https://github.com/akshaybhawar03/portfolio.git](https://github.com/akshaybhawar03/portfolio.git)
-Navigate to the project directory:
-
-Bash
-cd portfolio
-Install dependencies: (using clean install for consistency)
-
-Bash
-npm ci
-Run the development server:
-
-Bash
-npm run dev
-Build for production:
-
-Bash
-npm run build
-📈 Recent Updates
-Comprehensive SEO Refactor: Enhanced meta configurations for better search visibility.
-
-Workflow Optimization: Fixed and streamlined the GitHub Actions deployment pipeline using npm ci.
-
-Brand Update: Updated asset paths and logo configuration.

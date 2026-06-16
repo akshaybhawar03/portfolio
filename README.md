@@ -36,8 +36,7 @@ Welcome to my personal portfolio repository! This is a modern, fully responsive,
 ├── index.html          # Application entry point (SEO optimized)
 ├── tailwind.config.js  # Tailwind CSS configuration
 └── vite.config.js      # Vite build setup
-
----
+```
 
 ## 🌐 Connect with Me
 

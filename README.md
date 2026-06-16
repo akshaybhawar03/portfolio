@@ -2,8 +2,7 @@
 
 Welcome to my personal portfolio repository! This is a modern, fully responsive, and SEO-optimized web application designed to showcase my journey, technical skills, projects, and professional experience as a Software Engineer.
 
-🧑‍💻 **Live Demo:** [Deploying Link Here] *(e.g., https://akshaybhawar03.github.io/portfolio)*
-
+🧑‍💻 **Live Demo:** https://akshaybhawar03.github.io/portfolio/
 ---
 
 ## 🌟 Features

@@ -1,146 +1,69 @@
 import { motion } from "framer-motion";
-import { ABOUT } from "@/constants/testIds";
-import { TIMELINE, PROFILE } from "@/components/portfolio/data";
-import ChapterCard from "@/components/portfolio/ChapterCard";
-
-const STORY = [
-  "From a curious kid in Pune to a Full Stack Developer available for hire in India —",
-  "every line of code is a frame in an unfolding origin story.",
-  "Stack-fluent across the modern web. Recognized as a top Full Stack Developer in Maharashtra, obsessed with detail and allergic to mediocrity.",
-  "I don't just build apps. I engineer experiences that feel inevitable.",
-];
+import { TIMELINE } from "@/components/portfolio/data";
 
 export default function About() {
   return (
-    <section id="about" aria-label="About Akshay Bhawar" data-testid={ABOUT.root} className="relative w-full">
-      <ChapterCard chapter="CHAPTER IV / 06" title="THE ORIGIN" accent="#7b2fbe" as="h2" />
+    <section id="about" className="w-full max-w-[1400px] mx-auto px-6 py-24 md:py-32 scroll-mt-24 border-t border-[#E6D8C8]">
+      <div className="mb-20">
+        <h2 className="font-serif text-[4rem] md:text-[5.5rem] font-black text-[#1F1B18] tracking-tighter leading-[0.9]">
+          Rooted in Pune,<br/> building for everyone.
+        </h2>
+      </div>
 
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left: avatar */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative flex justify-center"
-          >
-            <div className="relative w-[300px] h-[380px] md:w-[360px] md:h-[440px]">
-              {/* Glow halo */}
-              <div className="absolute -inset-6 rounded-3xl opacity-80 blur-2xl"
-                   style={{ background: "radial-gradient(circle, rgba(123,47,190,0.5), transparent 60%)" }} />
-
-              {/* Frame */}
-              <div className="absolute inset-0 hud-frame overflow-hidden">
-                <span className="hud-corner-tr" />
-                <span className="hud-corner-bl" />
-
-                {/* Stylized SVG silhouette */}
-                <svg viewBox="0 0 200 240" className="w-full h-full">
-                  <defs>
-                    <linearGradient id="suit" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stopColor="#0a1622" />
-                      <stop offset="100%" stopColor="#02060d" />
-                    </linearGradient>
-                    <radialGradient id="chestArc" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#ffffff" />
-                      <stop offset="30%" stopColor="#00c8ff" />
-                      <stop offset="100%" stopColor="rgba(0,200,255,0)" />
-                    </radialGradient>
-                  </defs>
-                  <rect width="200" height="240" fill="url(#suit)" />
-                  {/* head */}
-                  <circle cx="100" cy="70" r="28" fill="#0a1622" stroke="#00c8ff" strokeOpacity="0.5" strokeWidth="0.8" />
-                  {/* shoulders / torso */}
-                  <path d="M40,240 C40,160 70,120 100,120 C130,120 160,160 160,240 Z" fill="#0a1622" stroke="#00c8ff" strokeOpacity="0.55" strokeWidth="0.8" />
-                  {/* arc reactor chest */}
-                  <circle cx="100" cy="170" r="22" fill="url(#chestArc)" />
-                  <circle cx="100" cy="170" r="11" fill="none" stroke="#00c8ff" strokeWidth="0.6" />
-                  <circle cx="100" cy="170" r="6" fill="#ffffff" />
-                  {/* armor panel lines */}
-                  <path d="M70 200 L100 190 L130 200" stroke="#00c8ff" strokeOpacity="0.35" fill="none" />
-                  <path d="M80 220 L100 210 L120 220" stroke="#00c8ff" strokeOpacity="0.25" fill="none" />
-                  <path d="M84 100 L100 90 L116 100" stroke="#00c8ff" strokeOpacity="0.4" fill="none" />
-                </svg>
-
-                {/* Particle dots */}
-                {[...Array(14)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 rounded-full bg-[#7b2fbe] shadow-[0_0_6px_#7b2fbe]"
-                    initial={{ x: Math.random() * 360, y: 440, opacity: 0 }}
-                    animate={{ y: -40, opacity: [0, 1, 0] }}
-                    transition={{ duration: 4 + Math.random() * 3, repeat: Infinity, delay: i * 0.3 }}
-                  />
-                ))}
-              </div>
-
-              <div className="absolute -bottom-4 left-4 right-4 hud-frame px-3 py-2 bg-black/80">
-                <span className="hud-corner-tr" />
-                <span className="hud-corner-bl" />
-                <div className="font-mono text-[10px] tracking-[0.3em] text-[#00c8ff]">SUBJECT // AKSHAY BHAWAR</div>
-                <div className="font-mono text-[9px] tracking-[0.25em] text-white/50">CLASSIFICATION: FULL-STACK · DESIGN ENG.</div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right: narration */}
-          <div>
-            {STORY.map((line, i) => (
-              <motion.p
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ delay: i * 0.2, duration: 0.6 }}
-                className={`text-lg md:text-xl leading-relaxed mb-5 ${i === 3 ? "text-white text-glow-arc font-display font-bold tracking-wide" : "text-[#b9d6e6]"}`}
-              >
-                {line}
-              </motion.p>
-            ))}
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="mt-10 hud-frame p-6"
-            >
-              <span className="hud-corner-tr" />
-              <span className="hud-corner-bl" />
-              <div className="font-mono text-[10px] tracking-[0.35em] text-[#7b2fbe] mb-2">// DIALOGUE</div>
-              <blockquote className="font-display font-bold text-2xl md:text-3xl text-white tracking-wide leading-snug">
-                "Code is the suit. Design is the heart. The reactor — that's the curiosity."
-              </blockquote>
-              <div className="mt-4 font-mono text-[10px] tracking-[0.3em] text-white/40">— {PROFILE.name}, 2025</div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Timeline */}
-        <div className="mt-24">
-          <div className="font-mono text-[11px] tracking-[0.35em] text-[#7b2fbe] mb-6">// STORY ARC TIMELINE</div>
+      <div className="flex flex-col md:flex-row gap-16 md:gap-24 items-start">
+        {/* Left Column: Quote & Author */}
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="w-full md:w-[45%] flex flex-col gap-10"
+        >
           <div className="relative">
-            <div className="absolute left-0 right-0 top-1/2 h-px bg-gradient-to-r from-transparent via-[#7b2fbe] to-transparent" />
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 relative">
-              {TIMELINE.map((t, i) => (
-                <motion.div
-                  key={t.year}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="relative pt-10"
-                >
-                  <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#7b2fbe] shadow-[0_0_18px_#7b2fbe] animate-pulse-arc" />
-                  <div className="font-display font-black text-white text-2xl text-center">{t.year}</div>
-                  <div className="font-mono text-[10px] tracking-[0.3em] text-[#00c8ff] text-center mt-1">{t.title}</div>
-                  <div className="text-[#b9d6e6] text-xs text-center mt-2">{t.text}</div>
-                </motion.div>
-              ))}
+            <span className="absolute -top-10 -left-6 text-[6rem] font-serif font-black text-[#E6D8C8] opacity-50 leading-none">"</span>
+            <h3 className="font-serif text-3xl md:text-[2.5rem] font-black text-[#1F1B18] leading-tight relative z-10">
+              Code is the foundation. Design is the heart. The curiosity is what keeps it running.
+            </h3>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-[#DF6C3B] flex items-center justify-center text-white font-serif font-black text-xl">
+              A
+            </div>
+            <div>
+              <h4 className="font-bold text-[#1F1B18] text-sm">Akshay Bhawar</h4>
+              <p className="text-[#6E645B] text-xs font-bold uppercase tracking-widest mt-1">Full Stack Architect</p>
             </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Right Column: Paragraph & Timeline */}
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          className="w-full md:w-[55%] flex flex-col gap-16"
+        >
+          <p className="text-[#6E645B] text-lg font-medium leading-relaxed">
+            I design and code beautifully simple things, and I love what I do. Just simple like that! Having spent the past half-decade deep in the Javascript ecosystem, I now architect heavy-lifting SaaS platforms from the ground up, ensuring they are as beautiful as they are robust.
+          </p>
+
+          <div className="flex flex-col gap-8 border-l border-[#E6D8C8] pl-8 relative">
+            {TIMELINE.map((item, index) => (
+              <div key={item.year} className="relative group">
+                <div className="absolute w-3 h-3 bg-[#F6EFE7] border-2 border-[#DF6C3B] rounded-full -left-[38px] top-1.5 group-hover:bg-[#DF6C3B] transition-colors"></div>
+                <div className="flex items-center gap-4 mb-2">
+                  <span className="font-black text-[#DF6C3B] text-sm tracking-widest">{item.year}</span>
+                  <h4 className="font-serif text-xl font-black text-[#1F1B18]">{item.title}</h4>
+                </div>
+                <p className="text-[#6E645B] font-medium">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

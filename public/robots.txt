@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://akshaybhawar03.github.io/portfolio/sitemap.xml
+Sitemap: http://akshaybhawar.me/sitemap.xml

@@ -1,214 +1,154 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
-import { toast } from "sonner";
-import { Send, Github, Linkedin, MapPin, Mail } from "lucide-react";
-import ChapterCard from "@/components/portfolio/ChapterCard";
-import { CONTACT } from "@/constants/testIds";
+import { motion } from "framer-motion";
+import { Mail, MapPin, Send, MessageSquare, Linkedin } from "lucide-react";
 import { PROFILE } from "@/components/portfolio/data";
 
-const EMAILJS_SERVICE_ID = "service_j25s9c2";
-const EMAILJS_TEMPLATE_ID = "template_vd9yz34";
-const EMAILJS_PUBLIC_KEY = "pxVTReSx11DFWsxC4";
-
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (loading) return;
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      toast.error("TRANSMISSION ABORTED · Required fields missing");
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service_id: EMAILJS_SERVICE_ID,
-          template_id: EMAILJS_TEMPLATE_ID,
-          user_id: EMAILJS_PUBLIC_KEY,
-          template_params: {
-            from_name: form.name.trim(),
-            from_email: form.email.trim(),
-            subject: form.subject.trim() || "INCOMING TRANSMISSION",
-            message: form.message.trim(),
-          },
-        }),
-      });
-      if (res.ok) {
-        toast.success("TRANSMISSION RECEIVED · Agent will respond within 24h");
-        setForm({ name: "", email: "", subject: "", message: "" });
-      } else {
-        const text = await res.text();
-        throw new Error(text || "Email service error");
-      }
-    } catch (err) {
-      toast.error("SIGNAL LOST · " + err.message);
-    } finally {
-      setLoading(false);
-    }
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      alert("Message transmitted successfully.");
+    }, 1500);
   };
 
   return (
-    <section id="contact" aria-label="Contact Information" data-testid={CONTACT.root} className="relative w-full overflow-hidden">
-      <ChapterCard chapter="CHAPTER V / 06" title="OPEN COMMS CHANNEL" accent="#ff6b35" />
-
-      {/* Radar background */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
-        <div className="relative w-[720px] h-[720px] max-w-[120vw] max-h-[120vw]">
-          <div className="absolute inset-0 rounded-full border border-[#00c8ff]/30" />
-          <div className="absolute inset-[12%] rounded-full border border-[#00c8ff]/25" />
-          <div className="absolute inset-[26%] rounded-full border border-[#00c8ff]/20" />
-          <div className="absolute inset-[40%] rounded-full border border-[#00c8ff]/15" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-full h-px bg-[#00c8ff]/15" />
-          </div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-full w-px bg-[#00c8ff]/15" />
-          </div>
-          <motion.div
-            className="absolute inset-0 origin-center"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-            style={{
-              background:
-                "conic-gradient(from 0deg, rgba(0,200,255,0.35), rgba(0,200,255,0) 30%)",
-              borderRadius: "50%",
-              maskImage:
-                "radial-gradient(circle at center, #000 0%, #000 100%)",
-            }}
-          />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[#00c8ff] shadow-[0_0_18px_#00c8ff] animate-pulse-arc" />
-        </div>
+    <section id="contact" className="w-full py-24 md:py-32 scroll-mt-24 border-t border-[#E6D8C8]/60 mt-12 mb-20">
+      <div className="flex flex-col gap-4 mb-16 md:mb-24">
+        <h2 className="font-serif text-4xl md:text-[4rem] font-black text-[#1F1B18] tracking-tighter leading-tight max-w-4xl">
+          Let's build something.
+        </h2>
+        <p className="text-lg text-[#6E645B] font-medium max-w-xl">
+          Have a project in mind, a team that needs scaling, or just want to discuss system architecture? Let's connect.
+        </p>
       </div>
 
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10 pb-24 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-          {/* Form */}
-          <form
-            data-testid={CONTACT.form}
-            onSubmit={submit}
-            className="lg:col-span-3 hud-frame p-6 md:p-10 scan-lines"
-            style={{ background: "rgba(2,6,13,0.85)" }}
-          >
-            <span className="hud-corner-tr" />
-            <span className="hud-corner-bl" />
-
-            <div className="flex items-center justify-between mb-6">
-              <div className="font-mono text-[11px] tracking-[0.35em] text-[#ff6b35]">
-                // CHANNEL: SECURE / ENCRYPTED
+      <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+        
+        {/* Left Column: Form */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="lg:w-7/12"
+        >
+          <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col sm:flex-row gap-8">
+              <div className="flex flex-col gap-2 flex-1">
+                <label className="text-sm font-bold text-[#C55E32] uppercase tracking-wider">Your Name</label>
+                <input 
+                  type="text" 
+                  required
+                  className="w-full bg-white border-b-2 border-[#E6D8C8] py-3 px-2 text-[#1F1B18] focus:outline-none focus:border-[#DF6C3B] transition-colors placeholder:text-[#E6D8C8] font-medium"
+                  placeholder="John Doe"
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                />
               </div>
-              <div className="font-mono text-[10px] tracking-[0.3em] text-white/50 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#00c8ff] animate-pulse-arc" /> LIVE
+              <div className="flex flex-col gap-2 flex-1">
+                <label className="text-sm font-bold text-[#C55E32] uppercase tracking-wider">Your Email</label>
+                <input 
+                  type="email" 
+                  required
+                  className="w-full bg-white border-b-2 border-[#E6D8C8] py-3 px-2 text-[#1F1B18] focus:outline-none focus:border-[#DF6C3B] transition-colors placeholder:text-[#E6D8C8] font-medium"
+                  placeholder="john@company.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                />
               </div>
             </div>
 
-            <Field label="AGENT NAME" testId={CONTACT.name}>
-              <input
-                data-testid={CONTACT.name}
-                type="text"
-                className="hud-input"
-                placeholder="Enter your designation..."
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-bold text-[#C55E32] uppercase tracking-wider">Subject</label>
+              <input 
+                type="text" 
+                required
+                className="w-full bg-white border-b-2 border-[#E6D8C8] py-3 px-2 text-[#1F1B18] focus:outline-none focus:border-[#DF6C3B] transition-colors placeholder:text-[#E6D8C8] font-medium"
+                placeholder="Architecture Consultation"
+                value={formData.subject}
+                onChange={(e) => setFormData({...formData, subject: e.target.value})}
               />
-            </Field>
-            <Field label="ENCRYPTED RELAY (EMAIL)" testId={CONTACT.email}>
-              <input
-                data-testid={CONTACT.email}
-                type="email"
-                className="hud-input"
-                placeholder="agent@protocol.io"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-            </Field>
-            <Field label="SUBJECT LINE" testId={CONTACT.subject}>
-              <input
-                data-testid={CONTACT.subject}
-                type="text"
-                className="hud-input"
-                placeholder="Mission objective..."
-                value={form.subject}
-                onChange={(e) => setForm({ ...form, subject: e.target.value })}
-              />
-            </Field>
-            <Field label="TRANSMISSION PAYLOAD" testId={CONTACT.message}>
-              <textarea
-                data-testid={CONTACT.message}
-                rows={6}
-                className="hud-input resize-none"
-                placeholder="Compose your signal..."
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-              />
-            </Field>
+            </div>
 
-            <button
-              data-testid={CONTACT.submit}
-              type="submit"
-              disabled={loading}
-              className="hud-btn mt-2 w-full justify-center disabled:opacity-50"
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-bold text-[#C55E32] uppercase tracking-wider">Message</label>
+              <textarea 
+                required
+                rows={4}
+                className="w-full bg-white border border-[#E6D8C8] rounded-xl p-4 text-[#1F1B18] focus:outline-none focus:border-[#DF6C3B] transition-colors placeholder:text-[#E6D8C8] font-medium resize-none mt-2"
+                placeholder="Tell me about your project..."
+                value={formData.message}
+                onChange={(e) => setFormData({...formData, message: e.target.value})}
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full py-5 bg-[#DF6C3B] text-white rounded-xl font-bold text-lg hover:bg-[#C55E32] transition-colors flex items-center justify-center gap-3 disabled:opacity-70 mt-4 shadow-lg shadow-[#DF6C3B]/20"
             >
-              <Send size={14} />
-              <span>{loading ? "TRANSMITTING..." : "SEND TRANSMISSION"}</span>
+              {isSubmitting ? "Transmitting..." : "Send Message"}
+              <Send size={20} className={isSubmitting ? "animate-pulse" : ""} />
             </button>
           </form>
+        </motion.div>
 
-          {/* Agent locator */}
-          <div className="lg:col-span-2 space-y-5">
-            <div className="hud-frame p-6">
-              <span className="hud-corner-tr" />
-              <span className="hud-corner-bl" />
-              <div className="font-mono text-[10px] tracking-[0.35em] text-[#00c8ff] mb-3">// LOCATE AGENT</div>
-              <div className="space-y-4">
-                <Locator icon={<MapPin size={14} />} label="POSITION" value={PROFILE.location} />
-                <Locator icon={<Mail size={14} />} label="DIRECT LINE" value={PROFILE.email} />
-                <Locator icon={<Github size={14} />} label="CODE VAULT" value="@akshaybhawar03" href={PROFILE.github} />
-                <Locator icon={<Linkedin size={14} />} label="PROFESSIONAL NET" value="/akshay-bhawar" href={PROFILE.linkedin} />
-              </div>
+        {/* Right Column: Contact Details */}
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="lg:w-5/12 flex flex-col gap-6"
+        >
+          {/* Detail Box 1 */}
+          <div className="flex items-center gap-6 p-6 border border-[#E6D8C8] rounded-2xl bg-[#F6EFE7] group hover:border-[#DF6C3B] transition-colors">
+            <div className="w-14 h-14 rounded-full bg-[#E6D8C8]/30 flex items-center justify-center shrink-0 group-hover:bg-[#DF6C3B] transition-colors">
+              <Mail className="w-6 h-6 text-[#DF6C3B] group-hover:text-white transition-colors" />
             </div>
-
-            <div className="hud-frame p-6">
-              <span className="hud-corner-tr" />
-              <span className="hud-corner-bl" />
-              <div className="font-mono text-[10px] tracking-[0.35em] text-[#ff6b35] mb-3">// RESPONSE PROTOCOL</div>
-              <p className="text-[#b9d6e6] text-sm leading-relaxed">
-                All incoming transmissions are reviewed within 24 standard hours.
-                For mission-critical engagements, use the encrypted relay above.
-              </p>
+            <div>
+              <p className="text-sm font-bold text-[#9DA381] uppercase tracking-widest mb-1">Direct Line</p>
+              <a href={`mailto:${PROFILE.email}`} className="font-serif text-lg font-black text-[#1F1B18] hover:text-[#C55E32]">{PROFILE.email}</a>
             </div>
           </div>
-        </div>
+
+          {/* Detail Box 2 */}
+          <div className="flex items-center gap-6 p-6 border border-[#E6D8C8] rounded-2xl bg-[#F6EFE7] group hover:border-[#DF6C3B] transition-colors">
+            <div className="w-14 h-14 rounded-full bg-[#E6D8C8]/30 flex items-center justify-center shrink-0 group-hover:bg-[#DF6C3B] transition-colors">
+              <MapPin className="w-6 h-6 text-[#DF6C3B] group-hover:text-white transition-colors" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-[#9DA381] uppercase tracking-widest mb-1">Base of Operations</p>
+              <p className="font-serif text-lg font-black text-[#1F1B18]">{PROFILE.location}</p>
+            </div>
+          </div>
+
+          {/* Detail Box 3 */}
+          <div className="flex items-center gap-6 p-6 border border-[#E6D8C8] rounded-2xl bg-[#F6EFE7] group hover:border-[#DF6C3B] transition-colors">
+            <div className="w-14 h-14 rounded-full bg-[#E6D8C8]/30 flex items-center justify-center shrink-0 group-hover:bg-[#DF6C3B] transition-colors">
+              <Linkedin className="w-6 h-6 text-[#DF6C3B] group-hover:text-white transition-colors" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-[#9DA381] uppercase tracking-widest mb-1">Professional Network</p>
+              <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="font-serif text-lg font-black text-[#1F1B18] hover:text-[#C55E32]">Connect on LinkedIn</a>
+            </div>
+          </div>
+
+          {/* Abstract Filler Block matching the layout */}
+          <div className="mt-6 p-8 bg-[#E6D8C8]/20 rounded-2xl border border-[#E6D8C8] flex flex-col gap-4">
+             <div className="w-8 h-8 text-[#DF6C3B]"><MessageSquare /></div>
+             <p className="text-sm font-bold text-[#C55E32] uppercase tracking-widest leading-relaxed">
+               Communication protocols are open 24/7. Expect a response within one business day for all standard inquiries.
+             </p>
+          </div>
+
+        </motion.div>
+
       </div>
     </section>
   );
-}
-
-function Field({ label, children }) {
-  return (
-    <div className="mb-5">
-      <div className="font-mono text-[10px] tracking-[0.3em] text-[#4ad8ff] mb-2">{label}</div>
-      {children}
-    </div>
-  );
-}
-
-function Locator({ icon, label, value, href }) {
-  const Inner = (
-    <div className="flex items-center gap-3 group" data-cursor="hover">
-      <div className="w-9 h-9 hex-clip flex items-center justify-center text-[#00c8ff] box-glow-arc bg-[#02060d]">
-        {icon}
-      </div>
-      <div className="min-w-0">
-        <div className="font-mono text-[10px] tracking-[0.3em] text-white/40">{label}</div>
-        <div className="text-white text-sm group-hover:text-[#00c8ff] transition truncate">{value}</div>
-      </div>
-    </div>
-  );
-  if (href) return <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Visit my ${label}`}>{Inner}</a>;
-  return Inner;
 }

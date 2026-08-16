@@ -1,96 +1,68 @@
 import { motion } from "framer-motion";
-import { SKILLS } from "@/constants/testIds";
 import { SKILL_GROUPS } from "@/components/portfolio/data";
-import ChapterCard from "@/components/portfolio/ChapterCard";
-import { useState } from "react";
-
-function Hexagon({ skill, accent, index, groupKey }) {
-  const [hover, setHover] = useState(false);
-  const power = hover ? skill.power : 0;
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
-      whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ delay: index * 0.06, duration: 0.55, ease: [0.85, 0, 0.15, 1] }}
-      onHoverStart={() => setHover(true)}
-      onHoverEnd={() => setHover(false)}
-      onTouchStart={() => setHover((s) => !s)}
-      data-testid={SKILLS.hex(`${groupKey}-${skill.name.toLowerCase()}`)}
-      data-cursor="hover"
-      className="relative w-[150px] h-[170px] cursor-pointer select-none"
-    >
-      <div
-        className="absolute inset-0 hex-clip transition-all duration-300"
-        style={{
-          background: hover
-            ? `radial-gradient(circle at 50% 40%, ${accent}33, #02060d 70%)`
-            : "linear-gradient(180deg, #051018, #02060d)",
-          boxShadow: hover
-            ? `0 0 0 1px ${accent}, 0 0 32px ${accent}99, inset 0 0 28px ${accent}33`
-            : `0 0 0 1px ${accent}66, inset 0 0 14px ${accent}22`,
-        }}
-      />
-      {/* inner ring */}
-      <div className="absolute inset-3 hex-clip" style={{ background: "#02060d", boxShadow: `inset 0 0 0 1px ${accent}55` }} />
-
-      <div className="relative h-full flex flex-col items-center justify-center px-3 text-center">
-        {/* SVG energy ring */}
-        <svg viewBox="0 0 100 100" className="absolute inset-0 m-auto w-[110px] h-[110px] -mt-2">
-          <circle cx="50" cy="50" r="40" fill="none" stroke={`${accent}33`} strokeWidth="2" />
-          <motion.circle
-            cx="50"
-            cy="50"
-            r="40"
-            fill="none"
-            stroke={accent}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeDasharray={2 * Math.PI * 40}
-            strokeDashoffset={2 * Math.PI * 40 * (1 - power / 100)}
-            initial={false}
-            animate={{ strokeDashoffset: 2 * Math.PI * 40 * (1 - power / 100) }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            transform="rotate(-90 50 50)"
-            style={{ filter: hover ? `drop-shadow(0 0 6px ${accent})` : "none" }}
-          />
-        </svg>
-        <div
-          className="relative font-display font-bold text-white text-sm tracking-[0.15em]"
-          style={{ textShadow: hover ? `0 0 12px ${accent}` : "none" }}
-        >
-          {skill.name.toUpperCase()}
-        </div>
-        <div className="relative font-mono text-[10px] tracking-[0.3em] mt-1" style={{ color: accent }}>
-          {hover ? `${skill.power}%` : "▲ HOVER"}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 export default function Skills() {
   return (
-    <section id="skills" aria-label="Technical Skills" data-testid={SKILLS.root} className="relative w-full tech-grid">
-      <h2 className="sr-only">Technical Skills - MERN Stack Developer, Node.js MongoDB Developer</h2>
-      <ChapterCard chapter="CHAPTER II / 06" title="THE POWER CORE" accent="#00c8ff" />
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10 pb-24">
-        {SKILL_GROUPS.map((group) => (
-          <div key={group.code} className="mb-16">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="font-mono text-[11px] tracking-[0.35em]" style={{ color: group.accent }}>
-                {group.code}
+    <section id="skills" className="w-full py-24 md:py-32 scroll-mt-24 border-t border-[#E6D8C8]/60 mt-12">
+      <div className="flex flex-col gap-4 mb-16">
+        <h2 className="font-serif text-4xl md:text-[3.5rem] font-black text-[#1F1B18] tracking-tighter leading-tight">
+          A toolkit built to ship.
+        </h2>
+        <p className="text-lg text-[#6E645B] font-medium max-w-xl">
+          Enterprise-grade architecture demands an elite arsenal. The core tech stack driving modern, scalable platforms.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+        {SKILL_GROUPS.map((group, index) => {
+          const num = `0${index + 1}`;
+          const cleanTitle = group.title.replace(/ARRAY|CORE/, "").trim();
+          
+          // Match the colors from the reference image: 1=Orange, 2=Olive Green, 3=Beige
+          let circleBg, textColor, waterMarkColor;
+          if (index === 0) {
+            circleBg = "bg-[#F2CBAA]"; textColor = "text-[#DF6C3B]"; waterMarkColor = "text-[#E6D8C8]";
+          } else if (index === 1) {
+            circleBg = "bg-[#E6D8C8]"; textColor = "text-[#9DA381]"; waterMarkColor = "text-[#E6D8C8]";
+          } else {
+            circleBg = "bg-[#F6EFE7]"; textColor = "text-[#8A4225]"; waterMarkColor = "text-[#E6D8C8]";
+          }
+          
+          return (
+            <motion.div 
+              key={group.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
+              className="flex flex-col border-t-2 border-[#E6D8C8] pt-6 group transition-colors duration-300"
+            >
+              <div className="flex items-start justify-between mb-8">
+                <div className={`w-10 h-10 rounded-full ${circleBg} border border-[#E6D8C8] flex items-center justify-center ${textColor} font-bold text-sm`}>
+                  {num}
+                </div>
+                <div className={`font-serif text-5xl font-black ${waterMarkColor} transition-colors duration-300`}>
+                  {num}
+                </div>
               </div>
-              <div className="h-px flex-1" style={{ background: `linear-gradient(90deg, ${group.accent}, transparent)` }} />
-              <div className="font-display font-bold text-white text-lg tracking-[0.18em]">{group.title}</div>
-            </div>
-            <div className="flex flex-wrap justify-center md:justify-start gap-6">
-              {group.items.map((skill, i) => (
-                <Hexagon key={skill.name} skill={skill} accent={group.accent} index={i} groupKey={group.code} />
-              ))}
-            </div>
-          </div>
-        ))}
+
+              <h3 className="font-serif text-2xl font-black text-[#1F1B18] mb-6 tracking-tight">
+                {cleanTitle}
+              </h3>
+
+              <div className="flex flex-wrap gap-3">
+                {group.items.map((skill) => (
+                  <span 
+                    key={skill.name}
+                    className="px-4 py-2 bg-[#F6EFE7] border border-[#E6D8C8] rounded-full text-sm font-semibold text-[#6E645B] shadow-sm hover:border-[#DF6C3B] hover:text-[#C55E32] transition-colors"
+                  >
+                    {skill.name}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

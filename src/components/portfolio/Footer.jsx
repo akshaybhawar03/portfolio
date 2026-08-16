@@ -1,96 +1,33 @@
-import { motion } from "framer-motion";
-import { FOOTER } from "@/constants/testIds";
-
-const CREDITS = [
-  { role: "DIRECTED BY", name: "AKSHAY BHAWAR" },
-  { role: "WRITTEN BY", name: "AKSHAY BHAWAR" },
-  { role: "ENGINEERED BY", name: "AKSHAY BHAWAR" },
-  { role: "DESIGN BY", name: "AKSHAY BHAWAR" },
-  { role: "STACK", name: "REACT · TYPESCRIPT · NODE · MONGODB" },
-  { role: "POWERED BY", name: "CAFFEINE & CURIOSITY" },
-  { role: "STUDIO", name: "AKSHAY.EXE STUDIOS · 2025" },
-];
+import { PROFILE } from "@/components/portfolio/data";
 
 export default function Footer() {
   return (
-    <footer
-      id="footer"
-      role="contentinfo"
-      data-testid={FOOTER.root}
-      className="relative w-full overflow-hidden border-t border-[#00c8ff]/15"
-    >
-      <div className="sr-only">
-        <h2>About This Portfolio</h2>
-        <p>
-          Welcome to the official portfolio of Akshay Bhawar, a top Full Stack Developer and Design Engineer based in Pune, Maharashtra. 
-          Specializing in React, Next.js, Node.js, and MongoDB, Akshay is available for hire in India and worldwide. 
-          Whether you need a MERN Stack Developer, a Next.js Developer in India, or a Web Developer in Daund, 
-          Akshay delivers highly optimized, scalable, and cinematic web experiences. 
-          Known as the Best Full Stack Developer Maharashtra for combining modern tech with stunning UI/UX design.
-        </p>
-      </div>
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-10 py-20 relative">
-        <div className="font-mono text-[11px] tracking-[0.4em] text-[#00c8ff] text-center mb-10">
-          // END OF FILE
-        </div>
-
-        <div className="font-display font-black text-white text-center text-3xl md:text-5xl tracking-[0.18em] mb-12 text-glow-arc">
-          AKSHAY.EXE
-        </div>
-
-        {/* Scrolling end credits */}
-        <div className="relative h-[260px] overflow-hidden mask-fade">
-          <motion.div
-            initial={{ y: "100%" }}
-            whileInView={{ y: "-110%" }}
-            viewport={{ once: false }}
-            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-x-0 flex flex-col items-center gap-6"
-          >
-            {[...CREDITS, ...CREDITS].map((c, i) => (
-              <div key={i} className="text-center">
-                <div className="font-mono text-[10px] tracking-[0.45em] text-white/40">{c.role}</div>
-                <div className="font-display font-bold text-white tracking-[0.2em] text-lg md:text-xl mt-1">
-                  {c.name}
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Post-credits scene */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          data-testid={FOOTER.postCredits}
-          className="mt-16 text-center"
-        >
-          <div className="font-mono text-[10px] tracking-[0.4em] text-[#ff6b35] mb-2">// POST-CREDITS SCENE</div>
-          <div className="font-display font-black text-white text-2xl md:text-4xl tracking-[0.15em] text-glow-gold">
-            AKSHAY WILL RETURN
+    <footer id="footer" className="w-full bg-white border-t border-gray-100 py-12 mt-12">
+      <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+          <div className="font-black text-xl tracking-tight text-gray-900">
+            {PROFILE.name.split(" ")[0]}<span className="text-blue-600">.</span>
           </div>
-          <div className="font-mono text-[11px] tracking-[0.3em] text-white/40 mt-3">
-            ...in production. v2.0 currently in development.
+          <span className="hidden md:block w-px h-6 bg-gray-200" />
+          <div className="text-sm font-medium text-gray-500">
+            Full Stack Developer & Design Engineer
           </div>
-        </motion.div>
-
-        <div className="mt-16 flex flex-col md:flex-row items-center justify-between gap-3 font-mono text-[10px] tracking-[0.3em] text-white/40">
-          <div>© 2025 AKSHAY.EXE STUDIOS · ALL FRAMES RESERVED</div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00c8ff] animate-pulse-arc" />
-            <span>BUILT IN PUNE · DEPLOYED EVERYWHERE</span>
-          </div>
+        </div>
+        
+        <div className="flex items-center gap-6">
+          <a href={PROFILE.github} target="_blank" rel="noreferrer" className="text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors">GitHub</a>
+          <a href={PROFILE.linkedin} target="_blank" rel="noreferrer" className="text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors">LinkedIn</a>
+          <a href={`mailto:${PROFILE.email}`} className="text-sm font-semibold text-gray-500 hover:text-gray-900 transition-colors">Email</a>
         </div>
       </div>
-
-      <style>{`
-        .mask-fade {
-          mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
-          -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 15%, #000 85%, transparent 100%);
-        }
-      `}</style>
+      
+      <div className="max-w-[1200px] mx-auto px-6 mt-8 flex flex-col md:flex-row items-center justify-between gap-2 text-xs font-medium text-gray-400">
+        <div>© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-green-500" />
+          <span>Available for new opportunities</span>
+        </div>
+      </div>
     </footer>
   );
 }

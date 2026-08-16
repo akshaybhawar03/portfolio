@@ -1,31 +1,21 @@
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import "./App.css";
+import { ReactLenis } from "lenis/react";
 import { Toaster } from "sonner";
-import Portfolio from "@/pages/Portfolio";
+import Portfolio from "./Portfolio";
 
 function App() {
+  useEffect(() => {
+    document.title = "Akshay Bhawar — Full Stack Developer";
+  }, []);
+
   return (
-    <div className="App">
-      <BrowserRouter basename="/">
-        <Routes>
-          <Route path="/" element={<Portfolio />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster
-        theme="dark"
-        position="top-right"
-        toastOptions={{
-          style: {
-            background: "#02060d",
-            border: "1px solid rgba(0,200,255,0.4)",
-            color: "#e7faff",
-            fontFamily: "'JetBrains Mono', monospace",
-            letterSpacing: "0.04em",
-            borderRadius: 0,
-          },
-        }}
-      />
-    </div>
+    <ReactLenis root options={{ lerp: 0.09, smoothWheel: true }}>
+      <div className="App">
+        <Portfolio />
+        <Toaster position="bottom-right" />
+      </div>
+    </ReactLenis>
   );
 }
 
